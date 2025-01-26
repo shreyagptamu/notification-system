@@ -9,9 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.notificationsystem</groupId>
-    <artifactId>demo</artifactId>
+    <artifactId>notification-system</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>demo</name>
+    <packaging>pom</packaging>
+    <name>notification-system</name>
     <description>Notification System Project</description>
     <url/>
     <licenses>
@@ -20,6 +21,9 @@
     <developers>
         <developer/>
     </developers>
+    <modules>
+        <module>user-service</module>
+    </modules>
     <scm>
         <connection/>
         <developerConnection/>
