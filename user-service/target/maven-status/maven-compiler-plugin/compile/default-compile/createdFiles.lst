@@ -1,0 +1,8 @@
+com/userservice/service/UserService.class
+com/userservice/repository/UserRepository.class
+com/userservice/repository/TokenRepository.class
+com/userservice/models/User.class
+com/userservice/controller/UserController.class
+com/userservice/models/Token.class
+com/userservice/Application.class
+com/userservice/models/Token$TokenBuilder.class
