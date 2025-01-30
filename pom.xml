@@ -24,6 +24,7 @@
     <modules>
         <module>user-service</module>
         <module>contact-service</module>
+        <module>kafka-config-service</module>
     </modules>
     <scm>
         <connection/>

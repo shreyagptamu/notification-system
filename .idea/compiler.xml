@@ -15,6 +15,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="contact-service" options="-parameters" />
+      <module name="kafka-config-service" options="" />
       <module name="spring-boot-starter-parent" options="" />
       <module name="user-service" options="-parameters" />
     </option>
