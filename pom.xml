@@ -29,7 +29,7 @@
         <module>kafka-consumer</module>
         <module>notification-scheduler</module>
         <module>notification-handler</module>
-        <!--        <module>grpc-definitions</module>-->
+        <module>grpc-definitions</module>
     </modules>
     <scm>
         <connection/>
