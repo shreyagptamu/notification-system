@@ -1,0 +1,19 @@
+syntax = "proto3";
+package com.grpcdefinitions;
+
+service ContactService {
+    rpc getContactsFromContactGroup (ContactGroupRequest) returns (ContactsResponse);
+}
+
+message ContactGroupRequest {
+    string contact_group_id = 1;
+}
+
+message ContactsResponse {
+   repeated Contact contacts=1;
+}
+
+message Contact{
+    string phone_number=1;
+    string email_id=2;
+}

@@ -23,7 +23,16 @@ public class KafkaConfig {
     }
     @Bean
     public NewTopic topic1() {
-        return new NewTopic("kafkaLearning", 1, (short) 1);
-    } }
+        return new NewTopic("kafkaLearning", 3, (short) 1);
+    }
+
+    @Bean
+    public NewTopic notificationTopic() {
+        return new NewTopic("notificationTopic", 3, (short) 1);
+    }
+
+}
+
+
 
 

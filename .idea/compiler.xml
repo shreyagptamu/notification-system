@@ -8,14 +8,27 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="contact-service" />
+        <module name="kafka-config-service" />
+        <module name="kafka-consumer" />
+        <module name="kafka-producer" />
         <module name="user-service" />
+        <module name="notification-scheduler" />
+        <module name="notification-handler" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="grpc-definitions" target="20" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="contact-service" options="-parameters" />
-      <module name="kafka-config-service" options="" />
+      <module name="grpc-definitions" options="-parameters" />
+      <module name="kafka-config-service" options="-parameters" />
+      <module name="kafka-consumer" options="-parameters" />
+      <module name="kafka-producer" options="-parameters" />
+      <module name="notification-handler" options="-parameters" />
+      <module name="notification-scheduler" options="-parameters" />
       <module name="spring-boot-starter-parent" options="" />
       <module name="user-service" options="-parameters" />
     </option>

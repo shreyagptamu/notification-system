@@ -25,6 +25,11 @@
         <module>user-service</module>
         <module>contact-service</module>
         <module>kafka-config-service</module>
+        <module>kafka-producer</module>
+        <module>kafka-consumer</module>
+        <module>notification-scheduler</module>
+        <module>notification-handler</module>
+        <!--        <module>grpc-definitions</module>-->
     </modules>
     <scm>
         <connection/>
