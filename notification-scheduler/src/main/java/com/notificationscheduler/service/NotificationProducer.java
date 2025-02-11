@@ -1,6 +1,5 @@
 package com.notificationscheduler.service;
 
-import com.grpcdefinitions.ContactServiceGrpc;
 import com.notificationscheduler.dto.MessageDTO;
 import com.notificationscheduler.models.NotificationPreference;
 import com.notificationscheduler.repository.NotificationPreferenceRepository;
@@ -16,7 +15,7 @@ public class NotificationProducer {
     private KafkaTemplate<String, MessageDTO> kafkaTemplate;
     private NotificationPreferenceRepository notificationPreferenceRepository;
 
-    private ContactServiceGrpc.ContactServiceBlockingStub contactServiceBlockingStub;
+//    private ContactServiceGrpc.ContactServiceBlockingStub contactServiceBlockingStub;
 
     @Scheduled(cron = "0 */5 * * * *")
     public void produceNotifications(){
