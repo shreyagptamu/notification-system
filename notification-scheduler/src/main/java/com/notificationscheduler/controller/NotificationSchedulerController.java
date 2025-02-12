@@ -4,6 +4,7 @@ import com.notificationscheduler.dto.NotificationPreferenceDTO;
 import com.notificationscheduler.dto.NotificationReadDTO;
 import com.notificationscheduler.models.NotificationPreference;
 import com.notificationscheduler.service.NotificationSchedulerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +17,8 @@ import java.util.List;
 
 @RestController
 public class NotificationSchedulerController {
+
+    @Autowired
     private NotificationSchedulerService notificationSchedulerService;
 
     public NotificationSchedulerController(NotificationSchedulerService notificationSchedulerService) {

@@ -3,6 +3,7 @@ package com.notificationscheduler.service;
 import com.notificationscheduler.dto.MessageDTO;
 import com.notificationscheduler.models.NotificationPreference;
 import com.notificationscheduler.repository.NotificationPreferenceRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,10 @@ import java.time.format.DateTimeFormatter;
 
 @Service
 public class NotificationProducer {
+
+    @Autowired
     private KafkaTemplate<String, MessageDTO> kafkaTemplate;
+    @Autowired
     private NotificationPreferenceRepository notificationPreferenceRepository;
 
 //    private ContactServiceGrpc.ContactServiceBlockingStub contactServiceBlockingStub;

@@ -4,16 +4,21 @@ import com.userservice.models.Token;
 import com.userservice.models.User;
 import com.userservice.repository.TokenRepository;
 import com.userservice.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Calendar;
 import java.util.Optional;
 import java.util.UUID;
 
 @Service
 public class UserService {
+    @Autowired
     private UserRepository userRepository;
+    @Autowired
     private TokenRepository tokenRepository;
 
     public String login(User user) {
@@ -54,5 +59,21 @@ public class UserService {
       }else{
           userRepository.save(user);
       }
+    }
+
+    public User getUserFromToken(String token) throws Exception{
+        /*This method checks the current time and sees if the token is still valid from the time of generation*/
+        Optional<Token> savedToken = tokenRepository.findById(token);
+
+        if(savedToken.isPresent()){
+            Instant tokenIssuedTill = savedToken.get().getTimestamp().toInstant();
+            if(Duration.between(tokenIssuedTill,Instant.now()).toMinutes() > 60){
+                throw new RuntimeException("Token expired; Kindly login again to generate a new token");
+            }
+        }else{
+            throw new RuntimeException("Token is invalid");
+        }
+
+        return userRepository.findById(savedToken.get().getUser().getEmailId()).get();
     }
 }

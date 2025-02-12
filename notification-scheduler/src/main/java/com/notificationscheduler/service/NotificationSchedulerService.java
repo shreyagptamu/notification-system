@@ -3,6 +3,7 @@ package com.notificationscheduler.service;
 import com.notificationscheduler.dto.NotificationPreferenceDTO;
 import com.notificationscheduler.models.NotificationPreference;
 import com.notificationscheduler.repository.NotificationPreferenceRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,6 +12,7 @@ import java.util.UUID;
 @Service
 public class NotificationSchedulerService {
 
+    @Autowired
     private NotificationPreferenceRepository notificationPreferenceRepository;
 
     public String createNotificationSchedule(NotificationPreferenceDTO notificationPreferenceDTO) {

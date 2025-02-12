@@ -1,7 +1,11 @@
 package com.userservice.controller;
 
+import com.userservice.dto.TokenDTO;
+import com.userservice.models.Error;
+import com.userservice.models.Token;
 import com.userservice.models.User;
 import com.userservice.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -10,8 +14,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Optional;
+
 @RestController
 public class UserController {
+
+    @Autowired
     private UserService userService;
 
     public UserController(UserService userService) {
@@ -19,22 +27,22 @@ public class UserController {
     }
 
     @PostMapping("/api/login")
-    public ResponseEntity<String> userLogin(@RequestBody User user){
+    public ResponseEntity<TokenDTO> userLogin(@RequestBody User user){
       String token = userService.login(user);
-
-        return ResponseEntity.ok(token);
+      return ResponseEntity.ok(TokenDTO.builder().token(token).build());
     }
 
     @PostMapping("/api/signUp")
-    public ResponseEntity userSignUp(@RequestBody User user){
+    public ResponseEntity<Optional<Error>> userSignUp(@RequestBody User user){
         try {
             userService.signUp(user);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
+            System.out.println(e);
+            return ResponseEntity.badRequest().body(
+                    Optional.of(Error.builder().message("Unable to sign-up user").errorCode("user-service.100").build()));
         }
-        return ResponseEntity.ok(HttpStatus.OK);
+        return ResponseEntity.ok(Optional.empty());
     }
-
 
 }
 

@@ -3,16 +3,15 @@ package com.notificationscheduler.models;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter
 @Setter
 @Builder
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class NotificationPreference {
     @Id
     private String preferenceId;

@@ -1,10 +1,12 @@
 package com.contactservice.controller;
 
 import com.contactservice.dto.ContactsRequestDTO;
+import com.contactservice.dto.Error;
 import com.contactservice.dto.GroupDTO;
 import com.contactservice.models.Contact;
 import com.contactservice.models.Group;
 import com.contactservice.service.ContactService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,9 +14,11 @@ import javax.xml.stream.Location;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class ContactController {
+    @Autowired
     private ContactService contactService;
 
     public ContactController(ContactService contactService) {
@@ -22,10 +26,14 @@ public class ContactController {
     }
 
     @PostMapping("/api/contact")
-    public ResponseEntity<String> createContact(@RequestBody Contact contact) throws URISyntaxException {
-        String id=contactService.addContact(contact);
-        String location="/api/contact/"+id;
-        return ResponseEntity.created(new URI(location)).build();
+    public ResponseEntity<Error> createContact(@RequestBody Contact contact) throws URISyntaxException {
+        try {
+            String id = contactService.addContact(contact);
+            String location = "/api/contact/" + id;
+            return ResponseEntity.created(new URI(location)).build();
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body(Error.builder().message(e.getMessage()).errorCode("contact-service.100").build());
+        }
 
     }
 
@@ -41,6 +49,21 @@ public class ContactController {
         return ResponseEntity.created(new URI(location)).build();
     }
 
+    @GetMapping("/api/contact/groups/{groupId}")
+    public ResponseEntity<GroupDTO> getContactGroup(@PathVariable String groupId ) {
+        Optional<GroupDTO> contactGroup = contactService.readGroup(groupId);
+        System.out.println(contactGroup.get());
+        return ResponseEntity.ok(contactGroup.get());
+    }
+
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<Error> returnErrors(RuntimeException exception){
+        if(exception.getMessage().contains("404")){
+            return ResponseEntity.notFound().build();
+        }else{
+            return ResponseEntity.badRequest().body(Error.builder().message(exception.getMessage()).build());
+        }
+    }
 
     @PutMapping("/api/contact/groups/{groupId}")
     public ResponseEntity updateGroup(@RequestBody GroupDTO groupDTO, @PathVariable String groupId ){

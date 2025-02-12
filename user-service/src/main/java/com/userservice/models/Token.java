@@ -11,6 +11,8 @@ import java.sql.Timestamp;
 @Data
 
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Token {
     @Id
     String token;
