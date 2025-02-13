@@ -79,31 +79,34 @@ services:
     ports:
       - "8082:8080"
 
-  kafka-consumer:
-    build:
-      context: ./kafka-consumer
-      dockerfile: Dockerfile
-    container_name: kafka-consumer
-    restart: always
-    depends_on:
-      - kafka
-    environment:
-      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
-    ports:
-      - "8083:8080"
 
-  kafka-producer:
+  notification-handler:
     build:
-      context: ./kafka-producer
+      context: ./notification-handler
       dockerfile: Dockerfile
-    container_name: kafka-producer
+    container_name: notification-handler
     restart: always
     depends_on:
       - kafka
     environment:
       KAFKA_BOOTSTRAP_SERVERS: kafka:9092
     ports:
-      - "8084:8080"
+      - "8085:8080"
+
+  notification-scheduler:
+    build:
+      context: ./notification-scheduler
+      dockerfile: Dockerfile
+    container_name: notification-scheduler
+    restart: always
+    depends_on:
+      - contact-service
+      - kafka
+    environment:
+      KAFKA_BOOTSTRAP_SERVERS: kafka:9092
+      CONTACT_GRPC_SERVER: contact-service:50051
+    ports:
+      - "8086:8080"
 
 volumes:
   postgres_data:

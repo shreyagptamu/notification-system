@@ -49,16 +49,16 @@
         <artifactId>spring-kafka</artifactId>
         <version>3.3.2</version>
     </dependency>
-<!--    <dependency>-->
-<!--        <groupId>com.notificationsystem</groupId>-->
-<!--        <artifactId>grpc-definitions</artifactId>-->
-<!--        <version>0.0.1-SNAPSHOT</version>-->
-<!--    </dependency>-->
-<!--    <dependency>-->
-<!--        <groupId>net.devh</groupId>-->
-<!--        <artifactId>grpc-client-spring-boot-starter</artifactId>-->
-<!--        <version>3.1.0.RELEASE</version>-->
-<!--    </dependency>-->
+    <dependency>
+        <groupId>com.notificationsystem</groupId>
+        <artifactId>grpc-definitions</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+        <groupId>net.devh</groupId>
+        <artifactId>grpc-client-spring-boot-starter</artifactId>
+        <version>3.1.0.RELEASE</version>
+    </dependency>
 </dependencies>
     <properties>
         <maven.compiler.source>20</maven.compiler.source>

@@ -1,5 +1,6 @@
 package com.notificationscheduler.service;
 
+import com.notificationscheduler.dto.ContactDTO;
 import com.notificationscheduler.dto.MessageDTO;
 import com.notificationscheduler.models.NotificationPreference;
 import com.notificationscheduler.repository.NotificationPreferenceRepository;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.*;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 @Service
 public class NotificationProducer {
@@ -19,7 +21,8 @@ public class NotificationProducer {
     @Autowired
     private NotificationPreferenceRepository notificationPreferenceRepository;
 
-//    private ContactServiceGrpc.ContactServiceBlockingStub contactServiceBlockingStub;
+    @Autowired
+    private ContactGrpcClient contactGrpcClient;
 
     @Scheduled(cron = "0 */5 * * * *")
     public void produceNotifications(){
@@ -39,6 +42,10 @@ public class NotificationProducer {
             Instant instant = localDateTime.atZone(ZoneId.systemDefault()).toInstant();
             if(isScheduleValid(recurrence, schedule.getLastRunOn(),instant)){
             if(instant.isBefore(Instant.now()) || instant.equals(Instant.now())){
+                List<ContactDTO> contactDTOList= contactGrpcClient.getContacts(schedule.getGroupId());
+                contactDTOList.forEach((contact) ->{
+                    kafkaTemplate.send("notificationTopic", MessageDTO.builder().message(schedule.getMessage()).emailId(contact.getEmailId()).phoneNumber(contact.getPhoneNumber()).build());
+                });
                 System.out.println("Schedule will be processed");
                 if(!schedule.getRecurrence().isEmpty()){
                     schedule.setLastRunOn(Instant.now().toString());

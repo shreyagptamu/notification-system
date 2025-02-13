@@ -8,7 +8,7 @@
         <artifactId>notification-system</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-
+    <groupId>com.grpcdefinitions</groupId>
     <artifactId>grpc-definitions</artifactId>
 
     <properties>
