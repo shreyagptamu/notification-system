@@ -45,12 +45,7 @@
         <version>3.3.2</version>
     </dependency>
     <dependency>
-        <groupId>org.springframework.kafka</groupId>
-        <artifactId>spring-kafka</artifactId>
-        <version>3.3.2</version>
-    </dependency>
-    <dependency>
-        <groupId>com.notificationsystem</groupId>
+        <groupId>com.grpcdefinitions</groupId>
         <artifactId>grpc-definitions</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </dependency>
