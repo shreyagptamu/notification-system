@@ -17,11 +17,18 @@ public class NotificationSchedulerService {
 
     public String createNotificationSchedule(NotificationPreferenceDTO notificationPreferenceDTO) {
         UUID preferenceId=UUID.randomUUID();
+        System.out.println(notificationPreferenceDTO.getNotificationSchedule().getTriggerTime());
+        NotificationPreference notificationPreference= NotificationPreference.builder()
+                .preferenceId(preferenceId.toString())
+                .notificationType(notificationPreferenceDTO.getNotificationType())
+                .userId(notificationPreferenceDTO.getUserId())
+                .groupId(notificationPreferenceDTO.getNotificationSchedule().getGroupId())
+                .recurrence(notificationPreferenceDTO.getNotificationSchedule().getRecurrence())
+                .triggerTime(notificationPreferenceDTO.getNotificationSchedule().getTriggerTime())
+                .message(notificationPreferenceDTO.getNotificationSchedule().getMessage())
+                .status("OPEN")
+                .build();
 
-        NotificationPreference notificationPreference= NotificationPreference.builder().preferenceId(preferenceId.toString()).notificationType(notificationPreferenceDTO.getNotificationType()).
-        userId(notificationPreferenceDTO.getUserId()).groupId(notificationPreferenceDTO.getNotificationSchedule().getGroupId()).recurrence(notificationPreferenceDTO.getNotificationSchedule().getRecurrence())
-                        .triggerTime(notificationPreferenceDTO.getNotificationSchedule().getTriggerTime()).message(notificationPreferenceDTO.getNotificationSchedule().getMessage())
-                        .status("OPEN").build();
         notificationPreferenceRepository.save(notificationPreference);
 
 

@@ -28,7 +28,7 @@ public class NotificationSchedulerController {
     @PostMapping("/api/notification/preference")
     public ResponseEntity<String> createNotificationSchedule(@RequestBody NotificationPreferenceDTO notificationPreferenceDTO) throws URISyntaxException {
         String id=notificationSchedulerService.createNotificationSchedule(notificationPreferenceDTO);
-        String location="/api/contact/"+id;
+        String location="/api/notification/preference"+id;
         return ResponseEntity.created(new URI(location)).build();
     }
 

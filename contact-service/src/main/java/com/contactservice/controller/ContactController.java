@@ -3,6 +3,7 @@ package com.contactservice.controller;
 import com.contactservice.dto.ContactsRequestDTO;
 import com.contactservice.dto.Error;
 import com.contactservice.dto.GroupDTO;
+import com.contactservice.dto.GroupRequestDTO;
 import com.contactservice.models.Contact;
 import com.contactservice.models.Group;
 import com.contactservice.service.ContactService;
@@ -47,6 +48,12 @@ public class ContactController {
         String groupId= contactService.createGroup(groupDTO);
         String location="/api/contact/groups/"+groupId;
         return ResponseEntity.created(new URI(location)).build();
+    }
+
+    @GetMapping("/api/contact/groups")
+    public ResponseEntity<List<GroupDTO>> getContactGroups(@RequestBody GroupRequestDTO groupRequestDTO) {
+        List<GroupDTO> contactGroups = contactService.readGroups(groupRequestDTO.getUserId());
+        return ResponseEntity.ok(contactGroups);
     }
 
     @GetMapping("/api/contact/groups/{groupId}")

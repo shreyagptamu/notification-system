@@ -57,6 +57,24 @@ public class ContactService {
        return groupDAO.getGroupId();
     }
 
+    public List<GroupDTO> readGroups(String userId){
+        List<Group> groups = groupsRepository.findAllByUserId(userId);
+        List<GroupDTO> groupDTOS = new ArrayList<>();
+        groups.forEach((group) ->{
+            List<ContactGroup> contactGroups = contactGroupRepository.findAllByGroupId(group.getGroupId());
+            List<Contact> contacts = new ArrayList<>();
+            contactGroups.forEach((contactGroup)->{
+                Optional<Contact> contact = contactRepository.findById(contactGroup.getContactId());
+                contact.ifPresent(contacts::add);
+            });
+            groupDTOS.add(GroupDTO.builder()
+                    .userId(group.getUserId())
+                    .groupName(group.getGroupName())
+                    .contacts(contacts)
+                    .build());
+        });
+        return groupDTOS;
+    }
     public Optional<GroupDTO> readGroup(String groupId){
         Optional<Group> contactGroup = groupsRepository.findById(groupId);
         System.out.println(contactGroup.get());

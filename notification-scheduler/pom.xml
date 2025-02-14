@@ -50,21 +50,29 @@
         <version>0.0.1-SNAPSHOT</version>
     </dependency>
     <dependency>
-        <groupId>net.devh</groupId>
-        <artifactId>grpc-client-spring-boot-starter</artifactId>
-        <version>3.1.0.RELEASE</version>
-    </dependency>
-    <dependency>
         <groupId>io.grpc</groupId>
-        <artifactId>grpc-api</artifactId>
-        <version>1.58.0</version> <!-- Check latest compatible version -->
+        <artifactId>grpc-netty-shaded</artifactId>
+        <version>1.57.2</version>
     </dependency>
 
     <dependency>
         <groupId>io.grpc</groupId>
-        <artifactId>grpc-core</artifactId>
-        <version>1.58.0</version>
+        <artifactId>grpc-protobuf</artifactId>
+        <version>1.57.2</version>
     </dependency>
+
+    <dependency>
+        <groupId>io.grpc</groupId>
+        <artifactId>grpc-stub</artifactId>
+        <version>1.57.2</version>
+    </dependency>
+
+    <dependency>
+        <groupId>net.devh</groupId>
+        <artifactId>grpc-client-spring-boot-starter</artifactId>
+        <version>3.1.0.RELEASE</version>
+    </dependency>
+
 </dependencies>
     <properties>
         <maven.compiler.source>20</maven.compiler.source>

@@ -5,7 +5,6 @@ import com.grpcdefinitions.ContactOuterClass;
 import com.grpcdefinitions.ContactServiceGrpc;
 import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
-import org.checkerframework.checker.units.qual.A;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
