@@ -10,6 +10,7 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.2.0",
     "@testing-library/user-event": "^13.5.0",
+    "chakra-multiselect": "^0.4.13",
     "framer-motion": "^12.4.7",
     "mocha": "^11.1.0",
     "react": "^19.0.0",
