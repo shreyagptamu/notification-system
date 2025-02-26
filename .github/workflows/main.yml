@@ -26,6 +26,12 @@ jobs:
       - name: Build Maven Project
         run: mvn clean install
 
+      - name: Upload Maven Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: maven-artifacts
+          path: '**/target'
+
   docker-build:
     needs: build
     runs-on: ubuntu-latest
@@ -39,12 +45,18 @@ jobs:
           - image: notification-handler
             directory: notification-handler
           - image: notification-scheduler
-            directory: notification-schedule
+            directory: notification-scheduler
           - image: user-service
             directory: user-service
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
+
+      - name: Download Maven Artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: maven-artifacts
+          path: .
 
       - name: Docker Login
         uses: docker/login-action@v2
