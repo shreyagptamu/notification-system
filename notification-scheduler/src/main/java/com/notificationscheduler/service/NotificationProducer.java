@@ -18,6 +18,7 @@ public class NotificationProducer {
 
     @Autowired
     private KafkaTemplate<String, MessageDTO> kafkaTemplate;
+
     @Autowired
     private NotificationPreferenceRepository notificationPreferenceRepository;
 
@@ -59,9 +60,13 @@ public class NotificationProducer {
                     schedule.setStatus("DONE");
                 }
             }
-        }}
+        }
+            notificationPreferenceRepository.save(schedule);
+        }
+
 
         });
+
     }
 
     private boolean isScheduleValid(String recurrence, String lastRunOn) {
