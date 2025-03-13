@@ -36,4 +36,9 @@ public class NotificationSchedulerController {
     public List<NotificationPreference> getNotificationPreferences(@RequestBody NotificationReadDTO notificationReadDTO){
         return notificationSchedulerService.getNotificationPreferences(notificationReadDTO.getUserId());
     }
+
+    @GetMapping("/health")
+    public ResponseEntity<Map<String, String>> health() {
+        return ResponseEntity.ok(Collections.singletonMap("status", "UP"));
+    }
 }

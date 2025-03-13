@@ -78,4 +78,9 @@ public class ContactController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/health")
+    public ResponseEntity<Map<String, String>> health() {
+        return ResponseEntity.ok(Collections.singletonMap("status", "UP"));
+    }
+
 }
