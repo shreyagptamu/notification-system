@@ -7,7 +7,7 @@ terraform {
   }
   backend "s3" {
     bucket = "notif-srv-tf-bucket"
-    key = "notif.tfstate"
+    key = "terraform.tfstate"
     region         = "us-east-1"
   }
   
