@@ -28,4 +28,8 @@ public class ContactGrpcService extends ContactServiceGrpc.ContactServiceImplBas
         responseObserver.onNext(contactsResponse);
         responseObserver.onCompleted();
     }
+
+    void test2(){
+        System.out.println("sdsdd");
+    }
 }
