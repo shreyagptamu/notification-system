@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class NotificationSchedulerController {
@@ -35,5 +37,10 @@ public class NotificationSchedulerController {
     @GetMapping("/api/notification/preference")
     public List<NotificationPreference> getNotificationPreferences(@RequestBody NotificationReadDTO notificationReadDTO){
         return notificationSchedulerService.getNotificationPreferences(notificationReadDTO.getUserId());
+    }
+
+    @GetMapping("/health")
+    public ResponseEntity<Map<String, String>> health() {
+        return ResponseEntity.ok(Collections.singletonMap("status", "UP"));
     }
 }

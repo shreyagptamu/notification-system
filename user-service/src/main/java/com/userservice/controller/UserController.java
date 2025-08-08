@@ -11,6 +11,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
+import java.util.Map;
 import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
@@ -24,13 +26,13 @@ public class UserController {
         this.userService = userService;
     }
 
-    @PostMapping("/api/login")
+    @PostMapping("/api/user/login")
     public ResponseEntity<TokenDTO> userLogin(@RequestBody User user){
       String token = userService.login(user);
       return ResponseEntity.ok(TokenDTO.builder().token(token).build());
     }
 
-    @PostMapping("/api/signUp")
+    @PostMapping("/api/user/signUp")
     public ResponseEntity<Optional<Error>> userSignUp(@RequestBody User user){
         try {
             userService.signUp(user);
@@ -42,5 +44,9 @@ public class UserController {
         return ResponseEntity.ok(Optional.empty());
     }
 
-}
+    @GetMapping("/health")
+    public ResponseEntity<Map<String, String>> health() {
+        return ResponseEntity.ok(Collections.singletonMap("status", "UP"));
+    }
 
+}

@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.*;
 import javax.xml.stream.Location;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -76,6 +78,11 @@ public class ContactController {
     public ResponseEntity updateGroup(@RequestBody GroupDTO groupDTO, @PathVariable String groupId ){
         contactService.updateGroup(groupDTO,groupId);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/health")
+    public ResponseEntity<Map<String, String>> health() {
+        return ResponseEntity.ok(Collections.singletonMap("status", "UP"));
     }
 
 }
